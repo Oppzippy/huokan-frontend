@@ -1,10 +1,12 @@
-import type { User, UsersApi } from "@huokan/huokanclient-ts";
+import type { User } from "@huokan/huokanclient-ts";
+import { UsersApi } from "@huokan/huokanclient-ts";
+import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class UserRepository {
-	private api: UsersApi;
+	private readonly api: UsersApi;
 
-	public constructor(api: UsersApi) {
-		this.api = api;
+	public constructor() {
+		this.api = new UsersApi(getApiConfiguration());
 	}
 
 	public async getMe(): Promise<User> {

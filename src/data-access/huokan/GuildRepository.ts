@@ -1,11 +1,13 @@
-import type { Guild, GuildPartial, GuildsApi } from "@huokan/huokanclient-ts";
+import type { Guild, GuildPartial } from "@huokan/huokanclient-ts";
+import { GuildsApi } from "@huokan/huokanclient-ts";
 import type { NameAndRealmFilter } from "../NameAndRealmFilter";
+import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class GuildRepository {
-	private api: GuildsApi;
+	private readonly api: GuildsApi;
 
-	public constructor(api: GuildsApi) {
-		this.api = api;
+	public constructor() {
+		this.api = new GuildsApi(getApiConfiguration());
 	}
 
 	public async createGuild(

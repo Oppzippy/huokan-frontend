@@ -1,11 +1,12 @@
-import type { DiscordAuthorizationApi } from "@huokan/huokanclient-ts";
+import { DiscordAuthorizationApi } from "@huokan/huokanclient-ts";
 import { BadResponseError } from "../BadResponseError";
+import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class DiscordAuthorizationRepository {
-	private api: DiscordAuthorizationApi;
+	private readonly api: DiscordAuthorizationApi;
 
-	public constructor(api: DiscordAuthorizationApi) {
-		this.api = api;
+	public constructor() {
+		this.api = new DiscordAuthorizationApi(getApiConfiguration());
 	}
 
 	public async getRedirectUrl(): Promise<string> {

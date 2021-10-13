@@ -1,14 +1,15 @@
 import type {
 	Organization,
 	OrganizationPartial,
-	OrganizationsApi,
 } from "@huokan/huokanclient-ts";
+import { OrganizationsApi } from "@huokan/huokanclient-ts";
+import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class OrganizationRepository {
-	private api: OrganizationsApi;
+	private readonly api: OrganizationsApi;
 
-	public constructor(api: OrganizationsApi) {
-		this.api = api;
+	public constructor() {
+		this.api = new OrganizationsApi(getApiConfiguration());
 	}
 
 	public async getOrganizations(): Promise<Organization[]> {

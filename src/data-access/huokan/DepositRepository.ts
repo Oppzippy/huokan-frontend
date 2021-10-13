@@ -1,10 +1,12 @@
-import type { Deposit, DepositsApi } from "@huokan/huokanclient-ts";
+import type { Deposit } from "@huokan/huokanclient-ts";
+import { DepositsApi } from "@huokan/huokanclient-ts";
+import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class DepositRepository {
-	private api: DepositsApi;
+	private readonly api: DepositsApi;
 
-	public constructor(api: DepositsApi) {
-		this.api = api;
+	public constructor() {
+		this.api = new DepositsApi(getApiConfiguration());
 	}
 
 	public async getDeposits(

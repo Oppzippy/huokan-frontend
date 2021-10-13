@@ -1,4 +1,4 @@
-export type NameAndRealmFilter = {
+export interface NameAndRealmFilter {
 	name?: string;
 	realm?: string;
-};
+}
