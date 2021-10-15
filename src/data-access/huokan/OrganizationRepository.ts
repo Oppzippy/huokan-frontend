@@ -8,8 +8,8 @@ import { getApiConfiguration } from "./HuokanClientApiFactory";
 export class OrganizationRepository {
 	private readonly api: OrganizationsApi;
 
-	public constructor() {
-		this.api = new OrganizationsApi(getApiConfiguration());
+	public constructor(apiKey: string) {
+		this.api = new OrganizationsApi(getApiConfiguration(apiKey));
 	}
 
 	public async getOrganizations(): Promise<Organization[]> {

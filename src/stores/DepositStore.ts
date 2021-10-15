@@ -1,7 +1,26 @@
 import type { Deposit } from "@huokan/huokanclient-ts";
-import { readable } from "svelte/store";
+import { derived, Readable, readable } from "svelte/store";
+import { authenticatedRepositoriesStore } from "./RepositoryStore";
 
-export const deposits = readable<Deposit[] | null>(null, (set) => {
-	const interval = setInterval(() => {}, 10000);
-	return () => clearInterval(interval);
-});
+export function createDepositStore(
+	organizationId: string,
+	guildId: string
+): Readable<Deposit[]> {
+	return derived(
+		authenticatedRepositoriesStore,
+		($authenticatedRepositoriesStore, set) => {
+			if ($authenticatedRepositoriesStore == null) {
+				return;
+			}
+			const interval = setInterval(async () => {
+				const deposits =
+					await $authenticatedRepositoriesStore.depositRepository.getDeposits(
+						organizationId,
+						guildId
+					);
+				set(deposits);
+			}, 10000);
+			return () => clearInterval(interval);
+		}
+	);
+}

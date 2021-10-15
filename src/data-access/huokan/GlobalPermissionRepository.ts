@@ -8,8 +8,8 @@ import { getApiConfiguration } from "./HuokanClientApiFactory";
 export class GlobalPermissionRepository {
 	private readonly api: GlobalUserPermissionsApi;
 
-	public constructor() {
-		this.api = new GlobalUserPermissionsApi(getApiConfiguration());
+	public constructor(apiKey: string) {
+		this.api = new GlobalUserPermissionsApi(getApiConfiguration(apiKey));
 	}
 
 	@PermanentMemoizeDecorator

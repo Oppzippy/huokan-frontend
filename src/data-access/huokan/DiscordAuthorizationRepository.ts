@@ -1,28 +1,25 @@
 import { DiscordAuthorizationApi } from "@huokan/huokanclient-ts";
-import { BadResponseError } from "../BadResponseError";
+import { BASE_URL } from "../../Configuration";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class DiscordAuthorizationRepository {
 	private readonly api: DiscordAuthorizationApi;
+	private readonly basePath: string;
 
 	public constructor() {
-		this.api = new DiscordAuthorizationApi(getApiConfiguration());
+		const configuration = getApiConfiguration();
+		this.api = new DiscordAuthorizationApi(configuration);
+		this.basePath = configuration.basePath;
 	}
 
 	public async getRedirectUrl(): Promise<string> {
-		const response = await this.api.redirectRaw({
-			redirect: "manual",
-		});
-		const redirectUrl = response.raw.headers.get("Location");
-		if (redirectUrl != null) {
-			return redirectUrl;
-		}
-		throw new BadResponseError("Redirect url was null");
+		return `${this.basePath}/authorization/discord/redirect?redirectUrl=${BASE_URL}`;
 	}
 
 	public async authorize(code: string): Promise<string> {
 		const response = await this.api.authorize({
 			code: code,
+			redirectUrl: BASE_URL,
 		});
 		return response.apiKey;
 	}

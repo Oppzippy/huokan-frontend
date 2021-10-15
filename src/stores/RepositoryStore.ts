@@ -1,10 +1,11 @@
-import { readable, writable } from "svelte/store";
+import { derived, Readable, readable } from "svelte/store";
 import { DiscordAuthorizationRepository } from "../data-access/huokan/DiscordAuthorizationRepository";
-import type { DepositRepository } from "../data-access/huokan/DepositRepository";
-import type { GuildRepository } from "../data-access/huokan/GuildRepository";
-import type { OrganizationRepository } from "../data-access/huokan/OrganizationRepository";
-import type { UserOrganizationsRepository } from "../data-access/huokan/UserOrganizationsRepository";
-import type { UserRepository } from "../data-access/huokan/UserRepository";
+import { DepositRepository } from "../data-access/huokan/DepositRepository";
+import { GuildRepository } from "../data-access/huokan/GuildRepository";
+import { OrganizationRepository } from "../data-access/huokan/OrganizationRepository";
+import { UserOrganizationsRepository } from "../data-access/huokan/UserOrganizationsRepository";
+import { UserRepository } from "../data-access/huokan/UserRepository";
+import { apiKeyStore } from "./ApiKeyStore";
 
 export interface UnauthenticatedRepositores {
 	discordAuthorizationRepository: DiscordAuthorizationRepository;
@@ -18,11 +19,27 @@ export interface AuthenticatedRepositories {
 	userRepository: UserRepository;
 }
 
-export const unauthenticatedRepositoresStore =
+export const unauthenticatedRepositoriesStore =
 	readable<UnauthenticatedRepositores>({
 		discordAuthorizationRepository: new DiscordAuthorizationRepository(),
 	});
 
 // Stores should be re-created when logging in/out
-export const authenticatedRepositoriesStore =
-	writable<AuthenticatedRepositories>();
+export const authenticatedRepositoriesStore = derived<
+	Readable<string | null>,
+	AuthenticatedRepositories | null
+>(apiKeyStore, ($apiKeyStore, set) => {
+	if ($apiKeyStore != null) {
+		set({
+			depositRepository: new DepositRepository($apiKeyStore),
+			guildRepository: new GuildRepository($apiKeyStore),
+			organizationRepository: new OrganizationRepository($apiKeyStore),
+			userOrganizationRepository: new UserOrganizationsRepository(
+				$apiKeyStore
+			),
+			userRepository: new UserRepository($apiKeyStore),
+		});
+	} else {
+		set(null);
+	}
+});

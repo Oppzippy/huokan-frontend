@@ -1,11 +1,12 @@
-import { Configuration } from "@huokan/huokanclient-ts";
+import { Configuration, HTTPHeaders } from "@huokan/huokanclient-ts";
 
-export function getApiConfiguration(): Configuration {
+export function getApiConfiguration(apiKey?: string): Configuration {
+	let headers: HTTPHeaders = {};
+	if (apiKey != undefined) {
+		headers["X-API-Key"] = apiKey;
+	}
 	return new Configuration({
-		apiKey: getApiKey() ?? undefined,
+		basePath: "http://127.0.0.1:5001",
+		headers,
 	});
-}
-
-function getApiKey(): string | null {
-	return localStorage.getItem("apiKey");
 }

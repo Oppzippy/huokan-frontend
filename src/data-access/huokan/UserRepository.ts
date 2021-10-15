@@ -5,8 +5,8 @@ import { getApiConfiguration } from "./HuokanClientApiFactory";
 export class UserRepository {
 	private readonly api: UsersApi;
 
-	public constructor() {
-		this.api = new UsersApi(getApiConfiguration());
+	public constructor(apiKey: string) {
+		this.api = new UsersApi(getApiConfiguration(apiKey));
 	}
 
 	public async getMe(): Promise<User> {

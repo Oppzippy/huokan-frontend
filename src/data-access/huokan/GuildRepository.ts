@@ -6,8 +6,8 @@ import { getApiConfiguration } from "./HuokanClientApiFactory";
 export class GuildRepository {
 	private readonly api: GuildsApi;
 
-	public constructor() {
-		this.api = new GuildsApi(getApiConfiguration());
+	public constructor(apiKey: string) {
+		this.api = new GuildsApi(getApiConfiguration(apiKey));
 	}
 
 	public async createGuild(
