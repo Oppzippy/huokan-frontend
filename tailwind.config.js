@@ -2,7 +2,11 @@ module.exports = {
 	purge: ["./src/**/*.svelte"],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		extend: {},
+		extend: {
+			backgroundImage: {
+				"huokan-logo": "url('/resources/images/huokan-logo.png')",
+			},
+		},
 	},
 	variants: {
 		extend: {

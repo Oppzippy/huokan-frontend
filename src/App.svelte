@@ -4,9 +4,11 @@
 	import { onMount } from "svelte";
 
 	import Router, { RouteDefinition } from "svelte-spa-router";
+	import DepositsPage from "./components/pages/DepositsPage.svelte";
 	import HomePage from "./components/pages/HomePage.svelte";
 	import LogInPage from "./components/pages/LogInPage.svelte";
-	import MainTemplate from "./components/templates/MainTemplate.svelte";
+	import LoggedInTemplate from "./components/templates/LoggedInTemplate.svelte";
+	import NotLoggedInTemplate from "./components/templates/NotLoggedInTemplate.svelte";
 	import { checkUrlForLogIn } from "./hooks/LogInHook";
 	import { Logger } from "./Logger";
 	import { apiKeyStore } from "./stores/ApiKeyStore";
@@ -14,6 +16,7 @@
 
 	const routes: RouteDefinition = {
 		"/": HomePage,
+		"/deposits": DepositsPage,
 	};
 
 	onMount(async () => {
@@ -39,11 +42,13 @@
 </script>
 
 {#if $apiKeyStore != null}
-	<MainTemplate>
+	<LoggedInTemplate>
 		<Router routes="{routes}" />
-	</MainTemplate>
+	</LoggedInTemplate>
 {:else}
-	<LogInPage />
+	<NotLoggedInTemplate>
+		<LogInPage />
+	</NotLoggedInTemplate>
 {/if}
 
 <style global lang="postcss">

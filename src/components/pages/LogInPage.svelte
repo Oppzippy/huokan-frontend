@@ -9,6 +9,11 @@
 	});
 </script>
 
-<div>
-	<a href="{redirectUrl}">Log in with Discord</a>
+<div
+	class="flex justify-center items-center w-screen h-screen bg-black bg-huokan-logo bg-contain bg-center bg-no-repeat"
+>
+	<a
+		class="bg-gray-900 text-white py-1 px-3 rounded-md hover:bg-gray-600"
+		href="{redirectUrl}">Log in with Discord</a
+	>
 </div>
