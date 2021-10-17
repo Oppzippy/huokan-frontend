@@ -6,6 +6,7 @@ import { OrganizationRepository } from "../data-access/huokan/OrganizationReposi
 import { UserOrganizationsRepository } from "../data-access/huokan/UserOrganizationsRepository";
 import { UserRepository } from "../data-access/huokan/UserRepository";
 import { apiKeyStore } from "./ApiKeyStore";
+import { GlobalPermissionRepository } from "../data-access/huokan/GlobalPermissionRepository";
 
 export interface UnauthenticatedRepositores {
 	discordAuthorizationRepository: DiscordAuthorizationRepository;
@@ -17,6 +18,7 @@ export interface AuthenticatedRepositories {
 	organizationRepository: OrganizationRepository;
 	userOrganizationRepository: UserOrganizationsRepository;
 	userRepository: UserRepository;
+	globalPermissionRepository: GlobalPermissionRepository;
 }
 
 export const unauthenticatedRepositoriesStore =
@@ -38,6 +40,9 @@ export const authenticatedRepositoriesStore = derived<
 				$apiKeyStore
 			),
 			userRepository: new UserRepository($apiKeyStore),
+			globalPermissionRepository: new GlobalPermissionRepository(
+				$apiKeyStore
+			),
 		});
 	} else {
 		set(null);

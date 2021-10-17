@@ -1,6 +1,6 @@
 <script>
-	import Navigation from "./partials/Navigation.svelte";
-	import NavigationUtilities from "./partials/NavigationUtilities.svelte";
+	import Navigation from "./partials/navigation/Navigation.svelte";
+	import NavigationUtilities from "./partials/navigation/NavigationUtilities.svelte";
 </script>
 
 <nav
