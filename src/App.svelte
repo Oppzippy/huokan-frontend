@@ -15,6 +15,8 @@
 	import { apiKeyStore } from "./stores/ApiKeyStore";
 	import { unauthenticatedRepositoriesStore } from "./stores/RepositoryStore";
 
+	import "carbon-components-svelte/css/all.css";
+
 	const routes: RouteDefinition = {
 		"/": HomePage,
 		"/deposits": DepositsPage,
@@ -52,9 +54,3 @@
 		<LogInPage />
 	</NotLoggedInTemplate>
 {/if}
-
-<style global lang="postcss">
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
-</style>

@@ -1,27 +1,74 @@
 <script lang="ts">
+	import {
+		Form,
+		FormGroup,
+		TextInput,
+		Button,
+		InlineLoading,
+		UnorderedList,
+		ListItem,
+		NumberInput,
+	} from "carbon-components-svelte";
 	import { authenticatedRepositoriesStore } from "../../../stores/RepositoryStore";
 	$: organizationRepository =
 		$authenticatedRepositoriesStore?.organizationRepository;
 	$: organizationsPromise = organizationRepository?.getOrganizations();
+
+	interface FormValues {
+		name: string;
+		slug: string;
+		discordGuildId: number;
+	}
+
+	const formValues: FormValues = {
+		discordGuildId: 0,
+		name: "",
+		slug: "",
+	};
+
+	async function submit() {
+		await organizationRepository?.createOrganization({
+			...formValues,
+		});
+		organizationsPromise = organizationRepository?.getOrganizations();
+	}
 </script>
 
 <h3>Add Organization</h3>
-<div>
-	<label for="organization-name">Organization Name</label>
-	<input id="organization-name" type="text" required />
-</div>
+<Form on:submit="{submit}">
+	<FormGroup>
+		<TextInput
+			bind:value="{formValues.name}"
+			required
+			labelText="Organization Name"
+		/>
+		<TextInput
+			bind:value="{formValues.slug}"
+			required
+			pattern="[a-z0-9\-]+"
+			labelText="Organization Slug"
+		/>
+		<NumberInput
+			bind:value="{formValues.discordGuildId}"
+			required
+			hideSteppers
+			label="Organization Discord ID"
+		/>
+	</FormGroup>
+	<Button type="submit">Submit</Button>
+</Form>
 
 <h3>Organizations</h3>
 
 {#if organizationsPromise != undefined}
 	{#await organizationsPromise}
-		Loading organizations
+		<InlineLoading />
 	{:then organizations}
-		<ul>
+		<UnorderedList>
 			{#each organizations as organization}
-				<li>{organization.name}</li>
+				<ListItem>{organization.name}</ListItem>
 			{/each}
-		</ul>
+		</UnorderedList>
 	{/await}
 {:else}
 	You are not logged in.

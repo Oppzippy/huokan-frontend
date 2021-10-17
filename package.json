@@ -15,6 +15,7 @@
 		"@tsconfig/svelte": "^2.0.0",
 		"@types/lodash": "^4.14.175",
 		"@types/object-hash": "^2.2.1",
+		"carbon-components-svelte": "^0.45.1",
 		"prettier": "2.4.1",
 		"rollup": "^2.3.4",
 		"rollup-plugin-css-only": "^3.1.0",
@@ -34,7 +35,6 @@
 		"postcss": "^8.3.9",
 		"sass": "^1.43.2",
 		"sirv-cli": "^1.0.0",
-		"svelte-spa-router": "^3.2.0",
-		"tailwindcss": "^2.2.17"
+		"svelte-spa-router": "^3.2.0"
 	}
 }

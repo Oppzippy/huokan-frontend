@@ -1,17 +1,10 @@
 <script>
-	import Navigation from "./partials/navigation/Navigation.svelte";
-	import NavigationUtilities from "./partials/navigation/NavigationUtilities.svelte";
+	import { Content } from "carbon-components-svelte";
+	import Navigation from "./partials/header/Header.svelte";
 </script>
 
-<nav
-	class="flex flex-col md:flex-row md:justify-between items-stretch md:items-center bg-black md:px-20"
->
-	<Navigation />
-	<NavigationUtilities />
-</nav>
+<Navigation />
 
-<main>
+<Content>
 	<slot />
-</main>
-
-<footer></footer>
+</Content>
