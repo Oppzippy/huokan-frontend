@@ -4,6 +4,7 @@
 	import { onMount } from "svelte";
 
 	import Router, { RouteDefinition } from "svelte-spa-router";
+	import OrganizationsAdmin from "./components/pages/admin/OrganizationsAdmin.svelte";
 	import DepositsPage from "./components/pages/DepositsPage.svelte";
 	import HomePage from "./components/pages/HomePage.svelte";
 	import LogInPage from "./components/pages/LogInPage.svelte";
@@ -17,6 +18,7 @@
 	const routes: RouteDefinition = {
 		"/": HomePage,
 		"/deposits": DepositsPage,
+		"/admin/organizations": OrganizationsAdmin,
 	};
 
 	onMount(async () => {
