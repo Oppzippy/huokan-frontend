@@ -13,10 +13,17 @@
 		SideNavLink,
 		SideNavMenuItem,
 		SideNavMenu,
+		HeaderPanelDivider,
 	} from "carbon-components-svelte";
 	import { globalPermissionStore } from "../../../../stores/current-user/GlobalPermissionStore";
-	import { GlobalPermission } from "@huokan/huokanclient-ts";
+	import {
+		Configuration,
+		DiscordAuthorizationApi,
+		GlobalPermission,
+	} from "@huokan/huokanclient-ts";
 	import { apiKeyStore } from "../../../../stores/current-user/ApiKeyStore";
+	import OrganizationSelection from "./OrganizationSelection.svelte";
+	import { selectedOrganizationStore } from "../../../../stores/current-user/OrganizationsStore";
 
 	$: isAdmin =
 		$globalPermissionStore?.has(GlobalPermission.Administrator) ?? false;
@@ -24,13 +31,29 @@
 	let isUtilitiesOpen: boolean;
 	let isSideNavOpen: boolean;
 
+	function refreshOrganizations() {
+		const repo = new DiscordAuthorizationApi(
+			new Configuration({
+				basePath: "http://localhost:5001",
+				headers: {
+					Authorization: `Bearer ${$apiKeyStore}`,
+				},
+			})
+		);
+		repo.refreshOrganizations();
+	}
+
 	function logOut() {
 		apiKeyStore.logOut();
 		isUtilitiesOpen = false;
 	}
 </script>
 
-<Header company="Huokan" bind:isSideNavOpen>
+<Header
+	company="Huokan"
+	platformName="{$selectedOrganizationStore?.name}"
+	bind:isSideNavOpen
+>
 	<HeaderNav>
 		<HeaderNavItem href="#" text="Home" />
 		<HeaderNavItem href="#/deposits" text="Deposits" />
@@ -46,6 +69,12 @@
 	<HeaderUtilities>
 		<HeaderAction bind:isOpen="{isUtilitiesOpen}">
 			<HeaderPanelLinks>
+				<HeaderPanelDivider>Select Organization</HeaderPanelDivider>
+				<OrganizationSelection />
+				<HeaderPanelDivider>Account</HeaderPanelDivider>
+				<HeaderPanelLink on:click="{refreshOrganizations}"
+					>Refresh Organizations</HeaderPanelLink
+				>
 				<HeaderPanelLink on:click="{logOut}">Log Out</HeaderPanelLink>
 			</HeaderPanelLinks>
 		</HeaderAction>
