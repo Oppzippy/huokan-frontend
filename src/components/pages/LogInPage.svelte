@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { Button } from "carbon-components-svelte";
+	import Accessibility16 from "carbon-icons-svelte/lib/Accessibility16";
 	import { onMount } from "svelte";
 	import { unauthenticatedRepositoriesStore } from "../../stores/RepositoryStore";
+	import DiscordLogoWhite from "../icons/DiscordLogoWhite.svelte";
 
 	let redirectUrl: string | undefined;
 	onMount(async () => {
@@ -9,11 +12,6 @@
 	});
 </script>
 
-<div
-	class="flex justify-center items-center w-screen h-screen bg-black bg-huokan-logo bg-contain bg-center bg-no-repeat"
->
-	<a
-		class="bg-gray-900 text-white py-1 px-3 rounded-md hover:bg-gray-600"
-		href="{redirectUrl}">Log in with Discord</a
-	>
-</div>
+<Button href="{redirectUrl}" icon="{DiscordLogoWhite}">
+	<span>Log in with Discord</span>
+</Button>
