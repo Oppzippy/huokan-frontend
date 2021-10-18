@@ -1,16 +1,11 @@
-import { derived, Readable, readable } from "svelte/store";
-import { DiscordAuthorizationRepository } from "../data-access/huokan/DiscordAuthorizationRepository";
-import { DepositRepository } from "../data-access/huokan/DepositRepository";
-import { GuildRepository } from "../data-access/huokan/GuildRepository";
-import { OrganizationRepository } from "../data-access/huokan/OrganizationRepository";
-import { UserOrganizationsRepository } from "../data-access/huokan/UserOrganizationsRepository";
-import { UserRepository } from "../data-access/huokan/UserRepository";
+import { derived, Readable } from "svelte/store";
+import { DepositRepository } from "../../data-access/huokan/DepositRepository";
+import { GuildRepository } from "../../data-access/huokan/GuildRepository";
+import { OrganizationRepository } from "../../data-access/huokan/OrganizationRepository";
+import { UserOrganizationsRepository } from "../../data-access/huokan/UserOrganizationsRepository";
+import { UserRepository } from "../../data-access/huokan/UserRepository";
 import { apiKeyStore } from "./ApiKeyStore";
-import { GlobalPermissionRepository } from "../data-access/huokan/GlobalPermissionRepository";
-
-export interface UnauthenticatedRepositores {
-	discordAuthorizationRepository: DiscordAuthorizationRepository;
-}
+import { GlobalPermissionRepository } from "../../data-access/huokan/GlobalPermissionRepository";
 
 export interface AuthenticatedRepositories {
 	depositRepository: DepositRepository;
@@ -20,11 +15,6 @@ export interface AuthenticatedRepositories {
 	userRepository: UserRepository;
 	globalPermissionRepository: GlobalPermissionRepository;
 }
-
-export const unauthenticatedRepositoriesStore =
-	readable<UnauthenticatedRepositores>({
-		discordAuthorizationRepository: new DiscordAuthorizationRepository(),
-	});
 
 // Stores should be re-created when logging in/out
 export const authenticatedRepositoriesStore = derived<

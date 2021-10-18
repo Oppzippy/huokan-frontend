@@ -4,12 +4,11 @@
 		FormGroup,
 		TextInput,
 		Button,
-		InlineLoading,
-		UnorderedList,
-		ListItem,
 		NumberInput,
+		DataTable,
+		DataTableSkeleton,
 	} from "carbon-components-svelte";
-	import { authenticatedRepositoriesStore } from "../../../stores/RepositoryStore";
+	import { authenticatedRepositoriesStore } from "../../../stores/current-user/AuthenticatedRepositoriesStore";
 	$: organizationRepository =
 		$authenticatedRepositoriesStore?.organizationRepository;
 	$: organizationsPromise = organizationRepository?.getOrganizations();
@@ -62,13 +61,17 @@
 
 {#if organizationsPromise != undefined}
 	{#await organizationsPromise}
-		<InlineLoading />
+		<DataTableSkeleton showHeader="{false}" showToolbar="{false}" />
 	{:then organizations}
-		<UnorderedList>
-			{#each organizations as organization}
-				<ListItem>{organization.name}</ListItem>
-			{/each}
-		</UnorderedList>
+		<DataTable
+			sortable
+			headers="{[
+				{ key: 'name', value: 'Name' },
+				{ key: 'slug', value: 'Slug' },
+				{ key: 'discordGuildId', value: 'Discord Guild ID' },
+			]}"
+			rows="{organizations}"
+		/>
 	{/await}
 {:else}
 	You are not logged in.

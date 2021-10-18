@@ -14,13 +14,12 @@
 		SideNavMenuItem,
 		SideNavMenu,
 	} from "carbon-components-svelte";
-	import { currentUserPermissionsStore } from "../../../../stores/CurrentUserStore";
+	import { globalPermissionStore } from "../../../../stores/current-user/GlobalPermissionStore";
 	import { GlobalPermission } from "@huokan/huokanclient-ts";
-	import { apiKeyStore } from "../../../../stores/ApiKeyStore";
+	import { apiKeyStore } from "../../../../stores/current-user/ApiKeyStore";
 
 	$: isAdmin =
-		$currentUserPermissionsStore?.has(GlobalPermission.Administrator) ??
-		false;
+		$globalPermissionStore?.has(GlobalPermission.Administrator) ?? false;
 
 	let isUtilitiesOpen: boolean;
 	let isSideNavOpen: boolean;

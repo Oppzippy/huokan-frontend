@@ -12,8 +12,8 @@
 	import NotLoggedInTemplate from "./components/templates/NotLoggedInTemplate.svelte";
 	import { checkUrlForLogIn } from "./hooks/LogInHook";
 	import { Logger } from "./Logger";
-	import { apiKeyStore } from "./stores/ApiKeyStore";
-	import { unauthenticatedRepositoriesStore } from "./stores/RepositoryStore";
+	import { apiKeyStore } from "./stores/current-user/ApiKeyStore";
+	import { unauthenticatedRepositoriesStore } from "./stores/UnauthenticatedRepositoriesStore";
 
 	import "carbon-components-svelte/css/all.css";
 

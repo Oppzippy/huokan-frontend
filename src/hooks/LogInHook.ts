@@ -1,5 +1,5 @@
 import type { DiscordAuthorizationRepository } from "../data-access/huokan/DiscordAuthorizationRepository";
-import { apiKeyStore } from "../stores/ApiKeyStore";
+import { apiKeyStore } from "../stores/current-user/ApiKeyStore";
 
 export async function checkUrlForLogIn(
 	discordAuthorizationRepository: DiscordAuthorizationRepository

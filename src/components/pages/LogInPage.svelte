@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Button } from "carbon-components-svelte";
-	import Accessibility16 from "carbon-icons-svelte/lib/Accessibility16";
 	import { onMount } from "svelte";
-	import { unauthenticatedRepositoriesStore } from "../../stores/RepositoryStore";
+	import { unauthenticatedRepositoriesStore } from "../../stores/UnauthenticatedRepositoriesStore";
 	import DiscordLogoWhite from "../icons/DiscordLogoWhite.svelte";
 
 	let redirectUrl: string | undefined;

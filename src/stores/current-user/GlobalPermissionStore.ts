@@ -3,24 +3,14 @@ import { derived, Readable } from "svelte/store";
 import {
 	AuthenticatedRepositories,
 	authenticatedRepositoriesStore,
-} from "./RepositoryStore";
+} from "./AuthenticatedRepositoriesStore";
+import { userStore } from "./UserStore";
 
-export const currentUserStore = derived<
-	Readable<AuthenticatedRepositories | null>,
-	User | null
->(authenticatedRepositoriesStore, ($authenticatedRepositoriesStore, set) => {
-	if ($authenticatedRepositoriesStore != null) {
-		$authenticatedRepositoriesStore.userRepository.getMe().then(set);
-	} else {
-		set(null);
-	}
-});
-
-export const currentUserPermissionsStore = derived<
+export const globalPermissionStore = derived<
 	[Readable<AuthenticatedRepositories | null>, Readable<User | null>],
 	Set<GlobalPermission> | null
 >(
-	[authenticatedRepositoriesStore, currentUserStore],
+	[authenticatedRepositoriesStore, userStore],
 	([$authenticatedRepositoriesStore, $currentUserStore], set) => {
 		if (
 			$authenticatedRepositoriesStore != null &&
