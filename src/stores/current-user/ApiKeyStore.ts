@@ -1,9 +1,7 @@
 import { writable } from "svelte/store";
 
-function createApiKeyStore() {
-	const { subscribe, set } = writable<string | null>(
-		localStorage.getItem("apiKey")
-	);
+function createApiKeyStore(value?: string) {
+	const { subscribe, set } = writable<string | null>(value);
 	return {
 		subscribe,
 		logIn: function (apiKey: string) {
@@ -17,4 +15,6 @@ function createApiKeyStore() {
 	};
 }
 
-export const apiKeyStore = createApiKeyStore();
+export const apiKeyStore = createApiKeyStore(
+	localStorage.getItem("apiKey") ?? undefined
+);

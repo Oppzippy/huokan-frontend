@@ -7,16 +7,14 @@
 		SelectSkeleton,
 	} from "carbon-components-svelte";
 	import { authenticatedRepositoriesStore } from "../../stores/current-user/AuthenticatedRepositoriesStore";
-	import { selectedOrganizationStore } from "../../stores/current-user/OrganizationsStore";
+
+	export let organizationId: string;
 
 	let guildsPromise: Promise<Guild[]> | null;
-	$: if (
-		$authenticatedRepositoriesStore != null &&
-		$selectedOrganizationStore != null
-	) {
+	$: if ($authenticatedRepositoriesStore != null) {
 		guildsPromise =
-			$authenticatedRepositoriesStore?.guildRepository.getGuilds(
-				$selectedOrganizationStore?.id
+			$authenticatedRepositoriesStore.guildRepository.getGuilds(
+				organizationId
 			);
 	}
 </script>

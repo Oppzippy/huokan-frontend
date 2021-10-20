@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { ResponseError } from "@huokan/huokanclient-ts";
-
 	import { onMount } from "svelte";
-
 	import Router, { RouteDefinition } from "svelte-spa-router";
 	import OrganizationsAdmin from "./components/pages/admin/OrganizationsAdmin.svelte";
 	import DepositsPage from "./components/pages/DepositsPage.svelte";
@@ -14,6 +12,7 @@
 	import { Logger } from "./Logger";
 	import { apiKeyStore } from "./stores/current-user/ApiKeyStore";
 	import { unauthenticatedRepositoriesStore } from "./stores/UnauthenticatedRepositoriesStore";
+	import GuildsAdmin from "./components/pages/admin/GuildsAdmin.svelte";
 
 	import "carbon-components-svelte/css/all.css";
 
@@ -21,6 +20,7 @@
 		"/": HomePage,
 		"/deposits": DepositsPage,
 		"/admin/organizations": OrganizationsAdmin,
+		"/admin/guilds": GuildsAdmin,
 	};
 
 	onMount(async () => {

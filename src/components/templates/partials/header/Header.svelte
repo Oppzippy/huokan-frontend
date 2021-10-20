@@ -63,6 +63,7 @@
 					href="#/admin/organizations"
 					text="Organizations"
 				/>
+				<HeaderNavItem href="#/admin/guilds" text="Guilds" />
 			</HeaderNavMenu>
 		{/if}
 	</HeaderNav>
@@ -91,6 +92,7 @@
 					href="#/admin/organizations"
 					text="Organizations"
 				/>
+				<SideNavMenuItem href="#/admin/guilds" text="Guilds" />
 			</SideNavMenu>
 		{/if}
 	</SideNavItems>
