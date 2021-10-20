@@ -1,5 +1,5 @@
 import { z, ZodFormattedError } from "zod";
-import type { DataOrError } from "./FormHelper";
+import { DataOrError, parseForm } from "./FormHelper";
 
 const schema = z.object({
 	name: z.string().min(1),
@@ -28,13 +28,5 @@ export function createOrganizationFormDefaultValues(): CreateOrganizationFormVal
 export function parseCreateOrganizationForm(
 	values: CreateOrganizationFormValues
 ): DataOrError<CreateOrganizationFormValues, CreateOrganizationFormErrors> {
-	const result = schema.safeParse(values);
-	if (result.success) {
-		return result;
-	} else {
-		return {
-			success: false,
-			error: result.error.format(),
-		};
-	}
+	return parseForm(schema, values);
 }

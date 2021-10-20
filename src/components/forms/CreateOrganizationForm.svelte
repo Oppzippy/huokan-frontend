@@ -39,9 +39,9 @@
 			// TODO show error message if undefined
 			if (organizationRepository != undefined) {
 				const organization =
-					await organizationRepository.createOrganization({
-						...result.data,
-					});
+					await organizationRepository.createOrganization(
+						result.data
+					);
 				formValues = createOrganizationFormDefaultValues();
 				dispatch("submitSuccees", {
 					data: result.data,
@@ -50,9 +50,7 @@
 			}
 		} else {
 			formErrors = result.error;
-			dispatch("validationError", {
-				error: formErrors,
-			});
+			dispatch("validationError", { error: formErrors });
 		}
 	}
 </script>
@@ -60,6 +58,7 @@
 <Form on:submit="{submit}">
 	<FormGroup>
 		<TextInput
+			required
 			bind:value="{formValues.name}"
 			invalid="{formErrors.name != undefined}"
 			invalidText="{formatErrorText(formErrors.name)}"
