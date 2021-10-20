@@ -1,61 +1,18 @@
 <script lang="ts">
-	import {
-		Form,
-		FormGroup,
-		TextInput,
-		Button,
-		NumberInput,
-		DataTable,
-		DataTableSkeleton,
-	} from "carbon-components-svelte";
+	import { DataTable, DataTableSkeleton } from "carbon-components-svelte";
 	import { authenticatedRepositoriesStore } from "../../../stores/current-user/AuthenticatedRepositoriesStore";
+	import CreateOrganizationForm from "../../forms/CreateOrganizationForm.svelte";
 	$: organizationRepository =
 		$authenticatedRepositoriesStore?.organizationRepository;
 	$: organizationsPromise = organizationRepository?.getOrganizations();
 
-	interface FormValues {
-		name: string;
-		slug: string;
-		discordGuildId: string;
-	}
-
-	const formValues: FormValues = {
-		discordGuildId: "",
-		name: "",
-		slug: "",
-	};
-
 	async function submit() {
-		await organizationRepository?.createOrganization({
-			...formValues,
-		});
 		organizationsPromise = organizationRepository?.getOrganizations();
 	}
 </script>
 
 <h3>Add Organization</h3>
-<Form on:submit="{submit}">
-	<FormGroup>
-		<TextInput
-			bind:value="{formValues.name}"
-			required
-			labelText="Organization Name"
-		/>
-		<TextInput
-			bind:value="{formValues.slug}"
-			required
-			pattern="[a-z0-9\-]+"
-			labelText="Organization Slug"
-		/>
-		<NumberInput
-			bind:value="{formValues.discordGuildId}"
-			required
-			hideSteppers
-			label="Organization Discord ID"
-		/>
-	</FormGroup>
-	<Button type="submit">Submit</Button>
-</Form>
+<CreateOrganizationForm on:submitSuccees="{submit}" />
 
 <h3>Organizations</h3>
 
