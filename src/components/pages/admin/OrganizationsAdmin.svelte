@@ -16,11 +16,11 @@
 	interface FormValues {
 		name: string;
 		slug: string;
-		discordGuildId: number;
+		discordGuildId: string;
 	}
 
 	const formValues: FormValues = {
-		discordGuildId: 0,
+		discordGuildId: "",
 		name: "",
 		slug: "",
 	};
