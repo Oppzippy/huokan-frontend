@@ -2,8 +2,8 @@ import { z, ZodFormattedError } from "zod";
 import { DataOrError, parseForm } from "./FormHelper";
 
 const schema = z.object({
-	name: z.string().min(1),
-	realm: z.string().min(1),
+	name: z.string().min(2).max(24),
+	realm: z.string().min(1).max(50),
 });
 
 export type CreateGuildFormValues = {

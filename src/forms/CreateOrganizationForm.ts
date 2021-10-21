@@ -2,8 +2,15 @@ import { z, ZodFormattedError } from "zod";
 import { DataOrError, parseForm } from "./FormHelper";
 
 const schema = z.object({
-	name: z.string().min(1),
-	slug: z.string().min(1),
+	name: z.string().min(2).max(50),
+	slug: z
+		.string()
+		.min(2)
+		.max(50)
+		.regex(
+			/^[A-Za-z0-9\-]+$/g,
+			"Only letters, numbers, and hyphens are allowed"
+		),
 	discordGuildId: z.string().regex(/^[0-9]+$/g, "Should be a number"),
 });
 
