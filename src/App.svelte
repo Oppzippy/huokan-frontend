@@ -1,7 +1,11 @@
 <script lang="ts">
-	import { ResponseError } from "@huokan/huokanclient-ts";
+	import {
+		GlobalPermission,
+		OrganizationPermission,
+		ResponseError,
+	} from "@huokan/huokanclient-ts";
 	import { onMount } from "svelte";
-	import Router, { RouteDefinition } from "svelte-spa-router";
+	import { Route } from "tinro";
 	import OrganizationsAdmin from "./components/pages/admin/OrganizationsAdmin.svelte";
 	import DepositsPage from "./components/pages/DepositsPage.svelte";
 	import HomePage from "./components/pages/HomePage.svelte";
@@ -13,15 +17,17 @@
 	import { apiKeyStore } from "./stores/current-user/ApiKeyStore";
 	import { unauthenticatedRepositoriesStore } from "./stores/UnauthenticatedRepositoriesStore";
 	import GuildsAdmin from "./components/pages/admin/GuildsAdmin.svelte";
+	import { selectedOrganizationPermissionStore } from "./stores/current-user/SelectedOrganizationPermissionStore";
+	import { globalPermissionStore } from "./stores/current-user/GlobalPermissionStore";
 
 	import "carbon-components-svelte/css/all.css";
 
-	const routes: RouteDefinition = {
-		"/": HomePage,
-		"/deposits": DepositsPage,
-		"/admin/organizations": OrganizationsAdmin,
-		"/admin/guilds": GuildsAdmin,
-	};
+	$: isOrganizationAdmin =
+		$selectedOrganizationPermissionStore?.has(
+			OrganizationPermission.Administrator
+		) ?? false;
+	$: isGlobalAdmin =
+		$globalPermissionStore?.has(GlobalPermission.Administrator) ?? false;
 
 	onMount(async () => {
 		try {
@@ -47,7 +53,18 @@
 
 {#if $apiKeyStore != null}
 	<LoggedInTemplate>
-		<Router routes="{routes}" />
+		<Route path="/"><HomePage /></Route>
+		<Route path="/deposits"><DepositsPage /></Route>
+		{#if isOrganizationAdmin}
+			<Route path="/organization-admin/*" firstmatch>
+				<Route path="/guilds"><GuildsAdmin /></Route>
+			</Route>
+		{/if}
+		{#if isGlobalAdmin}
+			<Route path="/admin/*" firstmatch>
+				<Route path="/organizations"><OrganizationsAdmin /></Route>
+			</Route>
+		{/if}
 	</LoggedInTemplate>
 {:else}
 	<NotLoggedInTemplate>

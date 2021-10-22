@@ -20,13 +20,19 @@
 		Configuration,
 		DiscordAuthorizationApi,
 		GlobalPermission,
+		OrganizationPermission,
 	} from "@huokan/huokanclient-ts";
 	import { apiKeyStore } from "../../../../stores/current-user/ApiKeyStore";
 	import OrganizationSelection from "./OrganizationSelection.svelte";
 	import { selectedOrganizationStore } from "../../../../stores/current-user/OrganizationsStore";
+	import { selectedOrganizationPermissionStore } from "../../../../stores/current-user/SelectedOrganizationPermissionStore";
 
-	$: isAdmin =
+	$: isGlobalAdmin =
 		$globalPermissionStore?.has(GlobalPermission.Administrator) ?? false;
+	$: isOrganizationAdmin =
+		$selectedOrganizationPermissionStore?.has(
+			OrganizationPermission.Administrator
+		) ?? false;
 
 	let isUtilitiesOpen: boolean;
 	let isSideNavOpen: boolean;
@@ -47,7 +53,12 @@
 		apiKeyStore.logOut();
 		isUtilitiesOpen = false;
 	}
+
+	// Jank way of passing a scoped style to a child component
+	let cursorPointer: HTMLDivElement | null | undefined;
 </script>
+
+<div class="cursor-pointer" bind:this="{cursorPointer}"></div>
 
 <Header
 	company="Huokan"
@@ -55,15 +66,30 @@
 	bind:isSideNavOpen
 >
 	<HeaderNav>
-		<HeaderNavItem href="#" text="Home" />
-		<HeaderNavItem href="#/deposits" text="Deposits" />
-		{#if isAdmin}
-			<HeaderNavMenu text="Admin">
+		<HeaderNavItem href="/" text="Home" />
+		<HeaderNavItem href="/deposits" text="Deposits" />
+		{#if isOrganizationAdmin}
+			<HeaderNavMenu
+				text="Organization Admin"
+				href="{null}"
+				class="{cursorPointer?.className}"
+			>
 				<HeaderNavItem
-					href="#/admin/organizations"
+					href="/organization-admin/guilds"
+					text="Guilds"
+				/>
+			</HeaderNavMenu>
+		{/if}
+		{#if isGlobalAdmin}
+			<HeaderNavMenu
+				text="Global Admin"
+				href="{null}"
+				class="{cursorPointer?.className}"
+			>
+				<HeaderNavItem
+					href="/admin/organizations"
 					text="Organizations"
 				/>
-				<HeaderNavItem href="#/admin/guilds" text="Guilds" />
 			</HeaderNavMenu>
 		{/if}
 	</HeaderNav>
@@ -84,16 +110,29 @@
 
 <SideNav bind:isOpen="{isSideNavOpen}">
 	<SideNavItems>
-		<SideNavLink href="#" text="Home" />
-		<SideNavLink href="#/deposits" text="Deposits" />
-		{#if isAdmin}
-			<SideNavMenu text="Admin">
+		<SideNavLink href="/" text="Home" />
+		<SideNavLink href="/deposits" text="Deposits" />
+		{#if isOrganizationAdmin}
+			<SideNavMenu text="Organization Admin">
 				<SideNavMenuItem
-					href="#/admin/organizations"
+					href="/organization-admin/guilds"
+					text="Guilds"
+				/>
+			</SideNavMenu>
+		{/if}
+		{#if isGlobalAdmin}
+			<SideNavMenu text="Global Admin">
+				<SideNavMenuItem
+					href="/admin/organizations"
 					text="Organizations"
 				/>
-				<SideNavMenuItem href="#/admin/guilds" text="Guilds" />
 			</SideNavMenu>
 		{/if}
 	</SideNavItems>
 </SideNav>
+
+<style lang="css">
+	.cursor-pointer {
+		cursor: pointer;
+	}
+</style>

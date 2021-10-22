@@ -1,0 +1,13 @@
+diff --git a/node_modules/carbon-components-svelte/types/UIShell/GlobalHeader/HeaderNavMenu.svelte.d.ts b/node_modules/carbon-components-svelte/types/UIShell/GlobalHeader/HeaderNavMenu.svelte.d.ts
+index feb88eb..9da1cbc 100644
+--- a/node_modules/carbon-components-svelte/types/UIShell/GlobalHeader/HeaderNavMenu.svelte.d.ts
++++ b/node_modules/carbon-components-svelte/types/UIShell/GlobalHeader/HeaderNavMenu.svelte.d.ts
+@@ -13,7 +13,7 @@ export interface HeaderNavMenuProps
+    * Specify the `href` attribute
+    * @default "/"
+    */
+-  href?: string;
++  href?: string | null;
+ 
+   /**
+    * Specify the text

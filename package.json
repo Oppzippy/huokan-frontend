@@ -5,8 +5,9 @@
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"start": "sirv public --no-clear",
-		"check": "svelte-check --tsconfig ./tsconfig.json"
+		"start": "sirv public --no-clear --single",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"postinstall": "npx patch-package"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.0.0",
@@ -36,7 +37,7 @@
 		"postcss": "^8.3.9",
 		"sass": "^1.43.2",
 		"sirv-cli": "^1.0.0",
-		"svelte-spa-router": "^3.2.0",
+		"tinro": "^0.6.7",
 		"zod": "^3.10.3"
 	}
 }
