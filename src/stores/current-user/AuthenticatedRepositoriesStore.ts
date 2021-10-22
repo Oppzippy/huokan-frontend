@@ -6,6 +6,7 @@ import { UserOrganizationsRepository } from "../../data-access/huokan/UserOrgani
 import { UserRepository } from "../../data-access/huokan/UserRepository";
 import { apiKeyStore } from "./ApiKeyStore";
 import { GlobalPermissionRepository } from "../../data-access/huokan/GlobalPermissionRepository";
+import { OrganizationPermissionRepository } from "../../data-access/huokan/OrganizationPermissionRepository";
 
 export interface AuthenticatedRepositories {
 	depositRepository: DepositRepository;
@@ -14,6 +15,7 @@ export interface AuthenticatedRepositories {
 	userOrganizationRepository: UserOrganizationsRepository;
 	userRepository: UserRepository;
 	globalPermissionRepository: GlobalPermissionRepository;
+	organizationPermissionRepository: OrganizationPermissionRepository;
 }
 
 // Stores should be re-created when logging in/out
@@ -33,6 +35,8 @@ export const authenticatedRepositoriesStore = derived<
 			globalPermissionRepository: new GlobalPermissionRepository(
 				$apiKeyStore
 			),
+			organizationPermissionRepository:
+				new OrganizationPermissionRepository($apiKeyStore),
 		});
 	} else {
 		set(null);

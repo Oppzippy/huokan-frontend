@@ -17,7 +17,7 @@ export class GlobalPermissionRepository {
 		userId: string
 	): Promise<Set<GlobalPermission>> {
 		const { permissions } = await this.api.getUserPermissions({
-			userId: userId,
+			userId,
 		});
 		return permissions;
 	}

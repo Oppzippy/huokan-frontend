@@ -18,7 +18,7 @@ export class DiscordAuthorizationRepository {
 
 	public async authorize(code: string): Promise<string> {
 		const response = await this.api.authorize({
-			code: code,
+			code,
 			redirectUrl: BASE_URL,
 		});
 		return response.apiKey;
