@@ -7,7 +7,7 @@ import {
 
 export const userStore = derived<
 	Readable<AuthenticatedRepositories | null>,
-	User | null
+	Readonly<User> | null
 >(authenticatedRepositoriesStore, ($authenticatedRepositoriesStore, set) => {
 	if ($authenticatedRepositoriesStore != null) {
 		$authenticatedRepositoriesStore.userRepository.getMe().then(set);

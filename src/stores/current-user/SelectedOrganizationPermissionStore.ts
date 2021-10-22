@@ -17,7 +17,7 @@ export const selectedOrganizationPermissionStore = derived<
 		Readable<User | null>,
 		Readable<Organization | null>
 	],
-	Set<OrganizationPermission> | null
+	ReadonlySet<OrganizationPermission> | null
 >(
 	[authenticatedRepositoriesStore, userStore, selectedOrganizationStore],
 	(

@@ -5,7 +5,7 @@ import { authenticatedRepositoriesStore } from "./AuthenticatedRepositoriesStore
 export function createDepositStore(
 	organizationId: string,
 	guildId: string
-): Readable<Deposit[]> {
+): Readable<ReadonlyArray<Deposit>> {
 	return derived(
 		authenticatedRepositoriesStore,
 		($authenticatedRepositoriesStore, set) => {

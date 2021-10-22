@@ -8,7 +8,7 @@ import { userStore } from "./UserStore";
 
 export const organizationsStore = derived<
 	[Readable<AuthenticatedRepositories | null>, Readable<User | null>],
-	Organization[] | null
+	ReadonlyArray<Organization> | null
 >(
 	[authenticatedRepositoriesStore, userStore],
 	([$authenticatedRepositoriesStore, $userStore], set) => {

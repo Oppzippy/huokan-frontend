@@ -21,7 +21,7 @@ export interface AuthenticatedRepositories {
 // Stores should be re-created when logging in/out
 export const authenticatedRepositoriesStore = derived<
 	Readable<string | null>,
-	AuthenticatedRepositories | null
+	Readonly<AuthenticatedRepositories> | null
 >(apiKeyStore, ($apiKeyStore, set) => {
 	if ($apiKeyStore != null) {
 		set({

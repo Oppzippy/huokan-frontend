@@ -8,7 +8,7 @@ import { userStore } from "./UserStore";
 
 export const globalPermissionStore = derived<
 	[Readable<AuthenticatedRepositories | null>, Readable<User | null>],
-	Set<GlobalPermission> | null
+	ReadonlySet<GlobalPermission> | null
 >(
 	[authenticatedRepositoriesStore, userStore],
 	([$authenticatedRepositoriesStore, $currentUserStore], set) => {
