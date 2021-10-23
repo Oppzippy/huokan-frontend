@@ -2,10 +2,10 @@
 	import {
 		GlobalPermission,
 		OrganizationPermission,
-		ResponseError,
 	} from "@huokan/huokanclient-ts";
 	import { onMount } from "svelte";
 	import { Route } from "tinro";
+	import { Loading } from "carbon-components-svelte";
 	import OrganizationsAdmin from "./components/pages/admin/OrganizationsAdmin.svelte";
 	import DepositsPage from "./components/pages/DepositsPage.svelte";
 	import HomePage from "./components/pages/HomePage.svelte";
@@ -13,12 +13,13 @@
 	import LoggedInTemplate from "./components/templates/LoggedInTemplate.svelte";
 	import NotLoggedInTemplate from "./components/templates/NotLoggedInTemplate.svelte";
 	import { checkUrlForLogIn } from "./hooks/LogInHook";
-	import { Logger } from "./Logger";
 	import { apiKeyStore } from "./stores/current-user/ApiKeyStore";
 	import { unauthenticatedRepositoriesStore } from "./stores/UnauthenticatedRepositoriesStore";
 	import GuildsAdmin from "./components/pages/admin/GuildsAdmin.svelte";
 	import { selectedOrganizationPermissionStore } from "./stores/current-user/SelectedOrganizationPermissionStore";
 	import { globalPermissionStore } from "./stores/current-user/GlobalPermissionStore";
+	import ToastContainer from "./components/toast-notification/ToastContainer.svelte";
+	import { userStore } from "./stores/current-user/UserStore";
 
 	import "carbon-components-svelte/css/all.css";
 
@@ -30,28 +31,19 @@
 		$globalPermissionStore?.has(GlobalPermission.Administrator) ?? false;
 
 	onMount(async () => {
-		try {
-			await checkUrlForLogIn(
-				$unauthenticatedRepositoriesStore.discordAuthorizationRepository
-			);
-		} catch (err) {
-			// TODO Display an error to the user
-			if (err instanceof ResponseError && err.response.status == 401) {
-			} else {
-				Logger.error(err);
-			}
-		} finally {
-			window.history.replaceState(
-				window.history.state,
-				document.title,
-				// TODO be more safe about this
-				window.location.href.replace(window.location.search, "")
-			);
-		}
+		await checkUrlForLogIn(
+			$unauthenticatedRepositoriesStore.discordAuthorizationRepository
+		);
+		window.history.replaceState(
+			window.history.state,
+			document.title,
+			// TODO be more safe about this
+			window.location.href.replace(window.location.search, "")
+		);
 	});
 </script>
 
-{#if $apiKeyStore != null}
+{#if $userStore != null}
 	<LoggedInTemplate>
 		<Route path="/"><HomePage /></Route>
 		<Route path="/deposits"><DepositsPage /></Route>
@@ -68,6 +60,12 @@
 	</LoggedInTemplate>
 {:else}
 	<NotLoggedInTemplate>
-		<LogInPage />
+		{#if $apiKeyStore != null}
+			<Loading />
+		{:else}
+			<LogInPage />
+		{/if}
 	</NotLoggedInTemplate>
 {/if}
+
+<ToastContainer />
