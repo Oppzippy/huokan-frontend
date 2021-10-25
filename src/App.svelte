@@ -15,7 +15,7 @@
 	import { checkUrlForLogIn } from "./hooks/LogInHook";
 	import { apiKeyStore } from "./stores/current-user/ApiKeyStore";
 	import { unauthenticatedRepositoriesStore } from "./stores/UnauthenticatedRepositoriesStore";
-	import GuildsAdmin from "./components/pages/admin/GuildsAdmin.svelte";
+	import GuildsAdmin from "./components/pages/organization-admin/GuildsAdmin.svelte";
 	import { selectedOrganizationPermissionStore } from "./stores/current-user/SelectedOrganizationPermissionStore";
 	import { globalPermissionStore } from "./stores/current-user/GlobalPermissionStore";
 	import ToastContainer from "./components/toast-notification/ToastContainer.svelte";

@@ -6,7 +6,7 @@
 		$authenticatedRepositoriesStore?.organizationRepository;
 	$: organizationsPromise = organizationRepository?.getOrganizations();
 
-	async function submit() {
+	function submit() {
 		organizationsPromise = organizationRepository?.getOrganizations();
 	}
 </script>
