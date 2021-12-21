@@ -9,29 +9,29 @@
 	import { authenticatedRepositoriesStore } from "../../stores/current-user/AuthenticatedRepositoriesStore";
 
 	export let organizationId: string;
+	export let selectedGuildId: string | undefined = undefined;
 
-	let guildsPromise: Promise<Guild[]> | null;
+	let guilds: Guild[] | null;
+	function setGuilds(newGuilds: Guild[]) {
+		guilds = newGuilds;
+		selectedGuildId = guilds[0].id;
+	}
 	$: if ($authenticatedRepositoriesStore != null) {
-		guildsPromise =
-			$authenticatedRepositoriesStore.guildRepository.getGuilds(
-				organizationId
-			);
+		$authenticatedRepositoriesStore.guildRepository
+			.getGuilds(organizationId)
+			.then(setGuilds);
 	}
 </script>
 
-{#if guildsPromise != null}
-	{#await guildsPromise}
-		<SelectSkeleton />
-	{:then guilds}
-		<Select labelText="Guild">
-			{#each guilds as guild}
-				<SelectItem
-					value="{guild.id}"
-					text="{`${guild.name}-${guild.realm}`}"
-				/>
-			{/each}
-		</Select>
-	{/await}
-{:else}
+{#if guilds == null}
 	<SelectSkeleton />
+{:else}
+	<Select labelText="Guild" on:change bind:selected="{selectedGuildId}">
+		{#each guilds as guild}
+			<SelectItem
+				value="{guild.id}"
+				text="{`${guild.name}-${guild.realm}`}"
+			/>
+		{/each}
+	</Select>
 {/if}
