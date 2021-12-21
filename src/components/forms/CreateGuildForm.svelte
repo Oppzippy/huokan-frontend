@@ -10,8 +10,8 @@
 	import { createEventDispatcher } from "svelte";
 	import {
 		createGuildFormDefaultValues,
-		CreateGuildFormErrors,
-		CreateGuildFormValues,
+		type CreateGuildFormErrors,
+		type CreateGuildFormValues,
 		parseCreateGuildForm,
 	} from "../../forms/CreateGuildForm";
 	import { formatErrorText } from "../../forms/FormHelper";

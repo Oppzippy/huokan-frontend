@@ -1,5 +1,5 @@
 import type { Deposit } from "@huokan/huokanclient-ts";
-import { derived, Readable } from "svelte/store";
+import { derived, type Readable } from "svelte/store";
 import { authenticatedRepositoriesStore } from "./AuthenticatedRepositoriesStore";
 
 export function createDepositStore(

@@ -1,4 +1,4 @@
-import { derived, Readable } from "svelte/store";
+import { derived, type Readable } from "svelte/store";
 import { DepositRepository } from "../../data-access/huokan/DepositRepository";
 import { GuildRepository } from "../../data-access/huokan/GuildRepository";
 import { OrganizationRepository } from "../../data-access/huokan/OrganizationRepository";

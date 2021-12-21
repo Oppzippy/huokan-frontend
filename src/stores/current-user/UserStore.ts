@@ -1,7 +1,7 @@
 import type { User } from "@huokan/huokanclient-ts";
-import { derived, Readable } from "svelte/store";
+import { derived, type Readable } from "svelte/store";
 import {
-	AuthenticatedRepositories,
+	type AuthenticatedRepositories,
 	authenticatedRepositoriesStore,
 } from "./AuthenticatedRepositoriesStore";
 

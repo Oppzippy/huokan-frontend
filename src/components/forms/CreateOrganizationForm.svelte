@@ -9,8 +9,8 @@
 	import { createEventDispatcher } from "svelte";
 	import {
 		createOrganizationFormDefaultValues,
-		CreateOrganizationFormErrors,
-		CreateOrganizationFormValues,
+		type CreateOrganizationFormErrors,
+		type CreateOrganizationFormValues,
 		parseCreateOrganizationForm,
 	} from "../../forms/CreateOrganizationForm";
 	import { formatErrorText } from "../../forms/FormHelper";

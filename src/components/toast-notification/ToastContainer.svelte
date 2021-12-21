@@ -2,7 +2,7 @@
 	import { ToastNotification } from "carbon-components-svelte";
 	import { onMount } from "svelte";
 	import {
-		NotificationInfo,
+		type NotificationInfo,
 		notificationStore,
 	} from "../../stores/NotificationStore";
 

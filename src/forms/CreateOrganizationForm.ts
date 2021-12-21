@@ -1,5 +1,5 @@
-import { z, ZodFormattedError } from "zod";
-import { DataOrError, parseForm } from "./FormHelper";
+import { z, type ZodFormattedError } from "zod";
+import { type DataOrError, parseForm } from "./FormHelper";
 
 const schema = z.object({
 	name: z.string().min(2).max(50),
