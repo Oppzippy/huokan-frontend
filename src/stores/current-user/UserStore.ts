@@ -1,5 +1,6 @@
-import type { User } from "@huokan/huokanclient-ts";
+import { ResponseError, type User } from "@huokan/huokanclient-ts";
 import { derived, type Readable } from "svelte/store";
+import { apiKeyStore } from "./ApiKeyStore";
 import {
 	type AuthenticatedRepositories,
 	authenticatedRepositoriesStore,
@@ -10,7 +11,19 @@ export const userStore = derived<
 	Readonly<User> | null
 >(authenticatedRepositoriesStore, ($authenticatedRepositoriesStore, set) => {
 	if ($authenticatedRepositoriesStore != null) {
-		$authenticatedRepositoriesStore.userRepository.getMe().then(set);
+		$authenticatedRepositoriesStore.userRepository
+			.getMe()
+			.then(set)
+			.catch((err) => {
+				if (
+					err instanceof ResponseError &&
+					err.response.status == 401
+				) {
+					apiKeyStore.logOut();
+				} else {
+					throw err;
+				}
+			});
 	} else {
 		set(null);
 	}
