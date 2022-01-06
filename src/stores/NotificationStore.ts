@@ -1,4 +1,4 @@
-import { ResponseError } from "@huokan/huokanclient-ts";
+import { ResponseError } from "@huokan/huokan-api-client";
 import { writable } from "svelte/store";
 import { Logger } from "../Logger";
 

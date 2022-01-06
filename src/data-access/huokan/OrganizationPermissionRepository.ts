@@ -1,4 +1,4 @@
-import { OrganizationUserPermissionsApi } from "@huokan/huokanclient-ts";
+import { OrganizationUserPermissionsApi } from "@huokan/huokan-api-client";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class OrganizationPermissionRepository {

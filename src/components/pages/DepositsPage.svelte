@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Deposit } from "@huokan/huokanclient-ts";
+	import type { Deposit } from "@huokan/huokan-api-client";
 
 	import { DataTable } from "carbon-components-svelte";
 	import { authenticatedRepositoriesStore } from "../../stores/current-user/AuthenticatedRepositoriesStore";

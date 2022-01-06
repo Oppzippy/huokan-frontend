@@ -1,4 +1,4 @@
-import { Configuration, type HTTPHeaders } from "@huokan/huokanclient-ts";
+import { Configuration, type HTTPHeaders } from "@huokan/huokan-api-client";
 
 export function getApiConfiguration(apiKey?: string): Configuration {
 	let headers: HTTPHeaders = {};

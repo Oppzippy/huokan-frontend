@@ -2,7 +2,7 @@
 	import {
 		GlobalPermission,
 		OrganizationPermission,
-	} from "@huokan/huokanclient-ts";
+	} from "@huokan/huokan-api-client";
 	import { onMount } from "svelte";
 	import { Route } from "tinro";
 	import { Loading } from "carbon-components-svelte";

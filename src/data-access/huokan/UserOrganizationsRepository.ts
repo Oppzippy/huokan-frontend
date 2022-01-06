@@ -1,5 +1,5 @@
-import type { Organization } from "@huokan/huokanclient-ts";
-import { UserOrganizationsApi } from "@huokan/huokanclient-ts";
+import type { Organization } from "@huokan/huokan-api-client";
+import { UserOrganizationsApi } from "@huokan/huokan-api-client";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class UserOrganizationsRepository {

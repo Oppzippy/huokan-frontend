@@ -1,8 +1,8 @@
 import type {
 	Organization,
 	OrganizationPartial,
-} from "@huokan/huokanclient-ts";
-import { OrganizationsApi } from "@huokan/huokanclient-ts";
+} from "@huokan/huokan-api-client";
+import { OrganizationsApi } from "@huokan/huokan-api-client";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class OrganizationRepository {

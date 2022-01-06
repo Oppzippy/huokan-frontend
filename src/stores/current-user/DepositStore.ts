@@ -1,4 +1,4 @@
-import type { Deposit } from "@huokan/huokanclient-ts";
+import type { Deposit } from "@huokan/huokan-api-client";
 import { derived, type Readable } from "svelte/store";
 import { authenticatedRepositoriesStore } from "./AuthenticatedRepositoriesStore";
 

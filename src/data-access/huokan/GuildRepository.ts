@@ -1,5 +1,5 @@
-import type { Guild, GuildPartial } from "@huokan/huokanclient-ts";
-import { GuildsApi } from "@huokan/huokanclient-ts";
+import type { Guild, GuildPartial } from "@huokan/huokan-api-client";
+import { GuildsApi } from "@huokan/huokan-api-client";
 import type { NameAndRealmFilter } from "../NameAndRealmFilter";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 

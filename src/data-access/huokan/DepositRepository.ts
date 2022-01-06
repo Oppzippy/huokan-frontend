@@ -1,5 +1,5 @@
-import type { Deposit } from "@huokan/huokanclient-ts";
-import { DepositsApi } from "@huokan/huokanclient-ts";
+import type { Deposit } from "@huokan/huokan-api-client";
+import { DepositsApi } from "@huokan/huokan-api-client";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class DepositRepository {

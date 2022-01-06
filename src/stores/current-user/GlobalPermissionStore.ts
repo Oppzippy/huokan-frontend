@@ -1,4 +1,4 @@
-import type { GlobalPermission, User } from "@huokan/huokanclient-ts";
+import type { GlobalPermission, User } from "@huokan/huokan-api-client";
 import { derived, type Readable } from "svelte/store";
 import {
 	type AuthenticatedRepositories,

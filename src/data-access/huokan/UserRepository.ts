@@ -1,5 +1,5 @@
-import type { User } from "@huokan/huokanclient-ts";
-import { UsersApi } from "@huokan/huokanclient-ts";
+import type { User } from "@huokan/huokan-api-client";
+import { UsersApi } from "@huokan/huokan-api-client";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 
 export class UserRepository {

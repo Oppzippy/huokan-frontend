@@ -1,4 +1,4 @@
-import { ResponseError, type User } from "@huokan/huokanclient-ts";
+import { ResponseError, type User } from "@huokan/huokan-api-client";
 import { derived, type Readable } from "svelte/store";
 import { apiKeyStore } from "./ApiKeyStore";
 import {

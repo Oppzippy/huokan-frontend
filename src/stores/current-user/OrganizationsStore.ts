@@ -1,4 +1,4 @@
-import type { Organization, User } from "@huokan/huokanclient-ts";
+import type { Organization, User } from "@huokan/huokan-api-client";
 import { derived, type Readable, writable } from "svelte/store";
 import {
 	type AuthenticatedRepositories,

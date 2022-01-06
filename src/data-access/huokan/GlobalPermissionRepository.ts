@@ -1,7 +1,7 @@
 import {
 	GlobalPermission,
 	GlobalUserPermissionsApi,
-} from "@huokan/huokanclient-ts";
+} from "@huokan/huokan-api-client";
 import { PermanentMemoizeDecorator } from "../../decorators/MemoizeDecorator";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 

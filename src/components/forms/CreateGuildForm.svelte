@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Guild } from "@huokan/huokanclient-ts";
+	import type { Guild } from "@huokan/huokan-api-client";
 
 	import {
 		Button,

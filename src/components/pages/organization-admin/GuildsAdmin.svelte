@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Guild } from "@huokan/huokanclient-ts";
+	import type { Guild } from "@huokan/huokan-api-client";
 	import { DataTable, DataTableSkeleton } from "carbon-components-svelte";
 
 	import { authenticatedRepositoriesStore } from "../../../stores/current-user/AuthenticatedRepositoriesStore";

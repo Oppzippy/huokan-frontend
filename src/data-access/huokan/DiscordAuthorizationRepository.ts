@@ -1,4 +1,4 @@
-import { DiscordAuthorizationApi } from "@huokan/huokanclient-ts";
+import { DiscordAuthorizationApi } from "@huokan/huokan-api-client";
 import { BASE_URL } from "../../Configuration";
 import { getApiConfiguration } from "./HuokanClientApiFactory";
 

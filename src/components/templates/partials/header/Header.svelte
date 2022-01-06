@@ -21,7 +21,7 @@
 		DiscordAuthorizationApi,
 		GlobalPermission,
 		OrganizationPermission,
-	} from "@huokan/huokanclient-ts";
+	} from "@huokan/huokan-api-client";
 	import { apiKeyStore } from "../../../../stores/current-user/ApiKeyStore";
 	import OrganizationSelection from "./OrganizationSelection.svelte";
 	import { selectedOrganizationStore } from "../../../../stores/current-user/OrganizationsStore";

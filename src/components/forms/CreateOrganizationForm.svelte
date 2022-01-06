@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Organization } from "@huokan/huokanclient-ts";
+	import type { Organization } from "@huokan/huokan-api-client";
 	import {
 		Form,
 		FormGroup,
