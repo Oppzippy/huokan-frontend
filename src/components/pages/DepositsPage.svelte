@@ -33,7 +33,6 @@
 		{#if deposits != null}
 			<!-- id may be added to Deposit in the future, so we ensure that id will override our array index id -->
 			<DataTable
-				sortable
 				headers="{[
 					{ key: 'characterName', value: 'Character Name' },
 					{ key: 'depositInCopper', value: 'Deposit in Copper' },
