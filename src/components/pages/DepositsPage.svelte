@@ -31,14 +31,13 @@
 		Loading deposits...
 	{:then deposits}
 		{#if deposits != null}
-			<!-- id may be added to Deposit in the future, so we ensure that id will override our array index id -->
 			<DataTable
 				headers="{[
 					{ key: 'characterName', value: 'Character Name' },
 					{ key: 'depositInCopper', value: 'Deposit in Copper' },
 					{ key: 'endorsements', value: 'Endorsements' },
 				]}"
-				rows="{deposits.map((deposit, i) => ({ id: i, ...deposit }))}"
+				rows="{deposits}"
 			/>
 		{:else}
 			No guild selected.
