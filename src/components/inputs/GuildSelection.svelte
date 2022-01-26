@@ -14,7 +14,7 @@
 	let guilds: Guild[] | null;
 	function setGuilds(newGuilds: Guild[]) {
 		guilds = newGuilds;
-		selectedGuildId = guilds[0].id;
+		selectedGuildId = guilds[0]?.id;
 	}
 	$: if ($authenticatedRepositoriesStore != null) {
 		$authenticatedRepositoriesStore.guildRepository
